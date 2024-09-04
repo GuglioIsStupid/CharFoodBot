@@ -1,8 +1,11 @@
 *.env
-Characters/
-Food/
+Characters/*
+Food/*
 __pycache__/
 *.json
 
 foods.py
 randomList.py
+
+!Characters/*.gitkeep
+!Food/*.gitkeep
