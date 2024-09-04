@@ -1,0 +1,8 @@
+*.env
+Characters/
+Food/
+__pycache__/
+*.json
+
+foods.py
+randomList.py
