@@ -85,7 +85,6 @@ if __name__ == "__main__":
     while True:
         if time.time() - (now or 0) >= TimeBetweenTweets:
             tweetData:list = generateTweet()
-            now = time.time()
 
             medias:list = []
             for file in tweetData[1]:
@@ -94,6 +93,12 @@ if __name__ == "__main__":
             tweet:str = tweetData[0]
             print(tweetData)
 
-            Client.create_tweet(text=tweet, media_ids=medias)
+            try:
+                Client.create_tweet(text=tweet, media_ids=medias)
+                now = time.time()
+            except Exception as e:
+                # Sleep for 1 second, then try again
+                print(e)
+                time.sleep(1)
         else:
             time.sleep(1)
