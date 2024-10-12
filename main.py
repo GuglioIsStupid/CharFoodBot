@@ -97,8 +97,8 @@ if __name__ == "__main__":
                 Client.create_tweet(text=tweet, media_ids=medias)
                 now = time.time()
             except Exception as e:
-                # Sleep for 1 second, then try again
+                # awh man! an error occurred :( Gotta wait for the next tweet now
+                now = 0
                 print(e)
-                time.sleep(1)
         else:
             time.sleep(1)
