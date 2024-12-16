@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from foods import foodList
 from randomList import randomList
 
-TimeBetweenTweets:int = 60 * 60 * 0.5 # 30 minutes. 60 seconds * 60 minutes * 0.5 hours
+TimeBetweenTweets:int = 60 * 60 # 30 minutes. 60 seconds * 60 minutes
 
 load_dotenv(".env")
 
