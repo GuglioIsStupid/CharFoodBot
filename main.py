@@ -82,6 +82,7 @@ def generateTweet() -> list:
     return [baseStr, files]
 
 def main() -> None:
+    global now, TimeBetweenTweets
     try:
         while True:
             if time.time() - (now or 0) >= TimeBetweenTweets:
