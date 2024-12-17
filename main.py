@@ -80,25 +80,31 @@ def generateTweet() -> list:
         baseStr = re.sub(match, food, baseStr)
 
     return [baseStr, files]
+
+def main() -> None:
+    try:
+        while True:
+            if time.time() - (now or 0) >= TimeBetweenTweets:
+                tweetData:list = generateTweet()
+
+                medias:list = []
+                for file in tweetData[1]:
+                    medias.append(api.media_upload(file).media_id)
+                
+                tweet:str = tweetData[0]
+                print(tweetData)
+
+                try:
+                    Client.create_tweet(text=tweet, media_ids=medias)
+                    now = time.time()
+                except Exception as e:
+                    now = 0
+                    print(e)
+            else:
+                time.sleep(1)
+    except:
+        print("An error occured. Restarting...")
+        main()
     
 if __name__ == "__main__":
-    while True:
-        if time.time() - (now or 0) >= TimeBetweenTweets:
-            tweetData:list = generateTweet()
-
-            medias:list = []
-            for file in tweetData[1]:
-                medias.append(api.media_upload(file).media_id)
-            
-            tweet:str = tweetData[0]
-            print(tweetData)
-
-            try:
-                Client.create_tweet(text=tweet, media_ids=medias)
-                now = time.time()
-            except Exception as e:
-                # awh man! an error occurred :( Gotta wait for the next tweet now
-                now = 0
-                print(e)
-        else:
-            time.sleep(1)
+    main()
